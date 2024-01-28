@@ -16,51 +16,43 @@ namespace Tennis
 
         public string GetScore()
         {
-            var score = "";
-            if (p1Point == p2Point && p1Point < 3)
+            if (p1Point == p2Point)
             {
-                score =  $"{ConvertPointsToString(p1Point)}-All"; 
-            }
-            if (p1Point == p2Point && p1Point > 2)
-                score = "Deuce";
-
-            if (p1Point > 0 && p2Point == 0)
-            {
-                score = $"{ConvertPointsToString(p1Point)}-Love";  
-            }
-            if (p2Point > 0 && p1Point == 0)
-            {
-                score = $"Love-{ConvertPointsToString(p2Point)}";  
+                return GetTieResult();
             }
 
-            if (p1Point > p2Point && p1Point < 4)
+            if (p1Point >= 4 || p2Point >= 4)
             {
-                score = $"{ConvertPointsToString(p1Point)}-{ConvertPointsToString(p2Point)}";
-            }
-            if (p2Point > p1Point && p2Point < 4)
-            {        
-                score = $"{ConvertPointsToString(p1Point)}-{ConvertPointsToString(p2Point)}";
+                return GetEndGameResult();
             }
 
-            if (p1Point > p2Point && p2Point >= 3)
-            {
-                score = "Advantage player1";
-            }
+            return GetMidGameResult();
+        }
 
-            if (p2Point > p1Point && p1Point >= 3)
+        private string GetTieResult()
+        {
+            return p1Point switch
             {
-                score = "Advantage player2";
-            }
+                0 => "Love-All",
+                1 => "Fifteen-All",
+                2 => "Thirty-All",
+                _ => "Deuce",
+            };
+        }
 
-            if (p1Point >= 4 && p2Point >= 0 && (p1Point - p2Point) >= 2)
-            {
-                score = "Win for player1";
-            }
-            if (p2Point >= 4 && p1Point >= 0 && (p2Point - p1Point) >= 2)
-            {
-                score = "Win for player2";
-            }
-            return score;
+        private string GetMidGameResult()
+        {
+            return $"{ConvertPointsToString(p1Point)}-{ConvertPointsToString(p2Point)}";
+        }
+
+        private string GetEndGameResult()
+        {
+            int negativeResult = p1Point - p2Point;
+
+            if (negativeResult == 1) return "Advantage player1";
+            if (negativeResult == -1) return "Advantage player2";
+            if (negativeResult >= 2) return "Win for player1";
+            return "Win for player2";
         }
 
         public void SetP1Score(int number)
