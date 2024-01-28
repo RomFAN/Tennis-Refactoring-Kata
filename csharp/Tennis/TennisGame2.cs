@@ -2,61 +2,61 @@ namespace Tennis
 {
     public class TennisGame2 : ITennisGame
     {
-        private int p1point;
-        private int p2point;
+        private int p1Point;
+        private int p2Point;
         private string player1Name;
         private string player2Name;
 
         public TennisGame2(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
-            p1point = 0;
+            p1Point = 0;
             this.player2Name = player2Name;
         }
 
         public string GetScore()
         {
             var score = "";
-            if (p1point == p2point && p1point < 3)
+            if (p1Point == p2Point && p1Point < 3)
             {
-                score =  $"{ConvertPointsToString(p1point)}-All"; 
+                score =  $"{ConvertPointsToString(p1Point)}-All"; 
             }
-            if (p1point == p2point && p1point > 2)
+            if (p1Point == p2Point && p1Point > 2)
                 score = "Deuce";
 
-            if (p1point > 0 && p2point == 0)
+            if (p1Point > 0 && p2Point == 0)
             {
-                score = $"{ConvertPointsToString(p1point)}-Love";  
+                score = $"{ConvertPointsToString(p1Point)}-Love";  
             }
-            if (p2point > 0 && p1point == 0)
+            if (p2Point > 0 && p1Point == 0)
             {
-                score = $"Love-{ConvertPointsToString(p2point)}";  
+                score = $"Love-{ConvertPointsToString(p2Point)}";  
             }
 
-            if (p1point > p2point && p1point < 4)
+            if (p1Point > p2Point && p1Point < 4)
             {
-                score = $"{ConvertPointsToString(p1point)}-{ConvertPointsToString(p2point)}";
+                score = $"{ConvertPointsToString(p1Point)}-{ConvertPointsToString(p2Point)}";
             }
-            if (p2point > p1point && p2point < 4)
+            if (p2Point > p1Point && p2Point < 4)
             {        
-                score = $"{ConvertPointsToString(p1point)}-{ConvertPointsToString(p2point)}";
+                score = $"{ConvertPointsToString(p1Point)}-{ConvertPointsToString(p2Point)}";
             }
 
-            if (p1point > p2point && p2point >= 3)
+            if (p1Point > p2Point && p2Point >= 3)
             {
                 score = "Advantage player1";
             }
 
-            if (p2point > p1point && p1point >= 3)
+            if (p2Point > p1Point && p1Point >= 3)
             {
                 score = "Advantage player2";
             }
 
-            if (p1point >= 4 && p2point >= 0 && (p1point - p2point) >= 2)
+            if (p1Point >= 4 && p2Point >= 0 && (p1Point - p2Point) >= 2)
             {
                 score = "Win for player1";
             }
-            if (p2point >= 4 && p1point >= 0 && (p2point - p1point) >= 2)
+            if (p2Point >= 4 && p1Point >= 0 && (p2Point - p1Point) >= 2)
             {
                 score = "Win for player2";
             }
@@ -81,12 +81,12 @@ namespace Tennis
 
         private void P1Score()
         {
-            p1point++;
+            p1Point++;
         }
 
         private void P2Score()
         {
-            p2point++;
+            p2Point++;
         }
 
         public void WonPoint(string player)
