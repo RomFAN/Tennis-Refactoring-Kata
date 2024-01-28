@@ -4,9 +4,6 @@ namespace Tennis
     {
         private int p1point;
         private int p2point;
-
-        private string p1res = "";
-        private string p2res = "";
         private string player1Name;
         private string player2Name;
 
@@ -22,36 +19,27 @@ namespace Tennis
             var score = "";
             if (p1point == p2point && p1point < 3)
             {
-                score = ConvertPointsToString(p1point);  
-                score += "-All";
+                score =  $"{ConvertPointsToString(p1point)}-All"; 
             }
             if (p1point == p2point && p1point > 2)
                 score = "Deuce";
 
             if (p1point > 0 && p2point == 0)
             {
-                p1res = ConvertPointsToString(p1point);  
-                p2res = "Love";
-                score = p1res + "-" + p2res;
+                score = $"{ConvertPointsToString(p1point)}-Love";  
             }
             if (p2point > 0 && p1point == 0)
             {
-                p2res = ConvertPointsToString(p2point);  
-                p1res = "Love";
-                score = p1res + "-" + p2res;
+                score = $"Love-{ConvertPointsToString(p2point)}";  
             }
 
             if (p1point > p2point && p1point < 4)
             {
-                p2res = ConvertPointsToString(p2point);   
-                p1res = ConvertPointsToString(p1point);  
-                score = p1res + "-" + p2res;
+                score = $"{ConvertPointsToString(p1point)}-{ConvertPointsToString(p2point)}";
             }
             if (p2point > p1point && p2point < 4)
-            {
-                p2res = ConvertPointsToString(p2point);  
-                p1res = ConvertPointsToString(p1point);            
-                score = p1res + "-" + p2res;
+            {        
+                score = $"{ConvertPointsToString(p1point)}-{ConvertPointsToString(p2point)}";
             }
 
             if (p1point > p2point && p2point >= 3)
